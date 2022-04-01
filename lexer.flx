@@ -1,0 +1,43 @@
+ const char* noquote(const char* str, int len){
+   char* strfinal = (char*)malloc(sizeof(char)*(len-1));
+   int i;
+   for(i = 1; i < len - 1; i++) {
+    strfinal[i - 1] = str[i];
+   }
+   return strfinal;
+  } 
+ int counter = 1;
+%%
+\n counter++;
+"Mail" return tMAIL;
+"schedule" return tSCHEDULE;
+"send" return tSEND;
+"from" return tFROM;
+"end Mail" return tENDMAIL;
+"end schedule" return tENDSCH;
+"to" return tTO;
+"set" return tSET;
+"," return tCOMMA;
+"(" return tLPR;
+"[" return tLBR;
+"@" return tAT;
+":" return tCOLON;
+")" return tRPR;
+"]" return tRBR;
+["][^"]*["] return tSTRING;
+[a-zA-Z_][a-zA-Z0-9_]* return tIDENT;
+[a-zA-Z0-9_-]+(["."?[a-zA-Z0-9_-]+])*"@"(([a-zA-Z0-9_][a-zA-Z0-9_-]*[a-zA-Z0-9_])|[a-zA-Z0-9_])"."(([a-zA-Z0-9_][a-zA-Z0-9_-]*[a-zA-Z0-9_])|[a-zA-Z0-9_])((("."[a-zA-Z0-9_][a-zA-Z0-9_-]*[a-zA-Z0-9_])|[a-zA-Z0-9_]))? return tADDRESS;
+[0-9][0-9]":"[0-9][0-9] return tTIME;
+[0-9]{2}"/"[0-9]{2}"/"[0-9]{4} return tDATE;
+" "
+\t
+. 
+%%
+int main()
+{
+yylex();
+return 0;
+}
+
+
+
